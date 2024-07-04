@@ -1,0 +1,101 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load custom_filters %}
+
+{% block content %}
+
+<body>
+  <div id="menu"></div>
+ <h1>Nosotros</h1>
+   <p width="40%" style="vertical-align: top;">
+¡Bienvenidos a Nuestro Mundo Gamer!
+En Nuestro Mundo Gamer, no solo vendemos videojuegos,
+creamos experiencias que despiertan la pasión por el juego en cada uno de nuestros clientes.
+Desde los nostálgicos clásicos hasta los últimos lanzamientos, estamos aquí para satisfacer todas tus necesidades gaming.
+Somos más que una simple tienda; somos un destino para los verdaderos aficionados de los videojuegos.
+Nuestro equipo está compuesto por apasionados gamers que están siempre dispuestos a compartir sus conocimientos y recomendaciones contigo.
+Ya sea que estés buscando el último título de acción, un juego indie único o simplemente quieras revivir viejas glorias con una consola retro,
+¡estamos aquí para ayudarte a encontrar lo que necesitas!
+Además de ofrecer una amplia selección de juegos para todas las plataformas,
+también organizamos eventos especiales, torneos y actividades para la comunidad gamer local.
+¿Quieres probar tus habilidades contra otros jugadores? ¡Ven y únete a nuestros torneos mensuales para demostrar quién es el verdadero campeón!
+    </p>
+    <div class="container-fluid">
+    <div class="row">
+      <div class="col col-sm-12 col-md-6 col-lg-4 col-xl-3">
+        <div class="card" style="width: 18rem; margin: 10px">
+          <img src="{% static 'core/img/el camilo sexy.jpg'%}" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">
+             GERENTE GENERAL
+             <h6>CAMILO FUNZALIDA</h6>
+            </h5>
+            <p class="card-text">
+        El puesto de Gerente General en una empresa de videojuegos es crucial para el éxito y la dirección estratégica de la compañía.
+        Este rol implica una amplia gama de responsabilidades que van desde la toma de decisiones estratégicas hasta la supervisión del día a día de las operaciones.
+         A continuación, se presenta una descripción general de las responsabilidades y habilidades típicas.
+            </p>
+            <a href="https://www.linkedin.com/in/camilo-fuenzalidac/" class="btn btn-primary">Contactar</a>
+          </div>
+        </div>
+      </div>
+       <div class="col col-sm-12 col-md-6 col-lg-4 col-xl-3">
+        <div class="card" style="width: 18rem; margin: 10px">
+          <img src="{% static 'core/img/fachero.jpg'%}" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">
+            DESARROLLO DE SOFTWARE
+             <H6>FRANCISCO MERINO</H6>
+            </h5>
+            <p class="card-text">
+              Un desarrollador de software es un profesional encargado de diseñar, crear, probar y mantener programas informáticos y aplicaciones.
+              Estos profesionales trabajan en equipo o de manera individual para transformar ideas y requisitos en software funcional y de alta calidad.
+              La definición de un desarrollador de software puede variar según su especialización
+              y el entorno en el que trabaja.
+            </p>
+            <a href="https://www.linkedin.com/in/francisco-javier-merino-jofre-121176295/" class="btn btn-primary">Contactar</a>
+          </div>
+        </div>
+      </div>
+      <div class="col col-sm-12 col-md-6 col-lg-4 col-xl-3">
+        <div class="card" style="width: 18rem; margin: 10px">
+          <img src="{% static 'core/img/david.jpg'%}" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">
+            INGENIERO EN SOFTWARE
+            </h5>
+            <H6>DAVID SALVATIERRA</H6>
+            <p class="card-text">
+              Un ingeniero en software es un profesional altamente capacitado en el diseño, desarrollo, implementación y mantenimiento de software.
+              Su principal objetivo es crear soluciones informáticas eficientes y confiables para satisfacer las necesidades de los usuarios y las empresas.
+              La definición de un ingeniero en software abarca una amplia gama de responsabilidades.
+            </p>
+            <a href="https://www.linkedin.com/in/david-salvatierra-988354292/?originalSubdomain=cl" class="btn btn-primary">Contactar</a>
+          </div>
+        </div>
+      </div>
+      <div class="col col-sm-12 col-md-6 col-lg-4 col-xl-3">
+        <div class="card" style="width: 18rem; margin: 10px">
+          <img src="{% static 'core/img/MARTINNNNNNNNNNNNNNNNNNNN.jpg'%}" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">
+            PROGRAMADOR DE BASE DE DATOS
+            </h5>
+            <H6>MARTIN CAMPOS</H6>
+            <p class="card-text">
+              Un programador de bases de datos es un profesional especializado en el diseño, desarrollo, implementación y mantenimiento de sistemas
+              de gestión de bases de datos (DBMS, por sus siglas en inglés), así como en la creación y optimización de consultas para acceder y
+              manipular datos almacenados en estas bases de datos.
+            </p>
+            <a href="https://www.linkedin.com/in/martin-campos-le%C3%B3n-b6abb4294/" class="btn btn-primary">Contactar</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="js/script.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</body>
+
+{% endblock content %}
+</html>

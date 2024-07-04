@@ -1,0 +1,54 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load custom_filters %}
+
+{% block content %}
+<form method="post" id="formulario-ficha">
+
+  {% csrf_token %}
+
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6">
+        <div class="card p-2">
+          <div class="d-flex justify-content-center align-items-center" style="height: 34.5rem;">
+            <img id="perfilImg" src="/media/{{imagen}}" class="img-fluid" alt="Imagen de perfil"
+              style="max-width: 100%; max-height: 100%; object-fit: contain;">
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="card" style="height: 52.5rem;">
+          <div class="card-body">
+            <p class="card-text" style="font-size: 40px">{{nombre}}</p>
+            <p class="card-text" style="color:limegreen; font-size:30px; font-family:'Courier New', Courier, monospace">
+              {{ html_estado|safe }}</p>
+            <p class="card-text" style="font-size:50px">{{ html_precio|safe }}</p>
+            <p class="card-text">Descripción:</p>
+            <p class="card-text" style="font-family:'Times New Roman', Times, serif; font-size:25px">{{descripcion}}</p>
+            <p class="card-text">Stock: {{html_stock|safe}}</p>
+            <div>
+              <input type="hidden" id="accion">
+              <a href="{% url 'comprar_ahora' %}" class="btn btn-primary ancho-160px">
+                Comprar ahora
+              </a>
+              <a href="{% url 'agregar_producto_al_carrito' id %}" class="btn btn-secondary ancho-160px">
+                Agregar al carrito
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</form>
+
+
+
+{% endblock content %}
+
+{% block script %}
+<script src="{% static 'core/js/ficha.js' %}"></script>
+{% endblock script %}

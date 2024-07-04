@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mantenedor de bodega</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="menu"></div>
+        <h1>Mantenedor de Bodega</h1>
+        
+        <div class="container">
+
+            <form name="validacionBodega" id="validacionBodega" novalidate method="post">
+            <div class="row">
+                <div class="mb-3, col-lg-8">
+                    <div class="card p-3">
+                    <label for="categoria" class="form-label">Categoria</label>
+                    
+                    <select class="form-select" id="categoria" name="categoria">
+                        <option value="" selected>Seleccione una categoría</option>
+                        <option value="aventura">Aventura</option>
+                        <option value="batalla">Batalla</option>
+                        <option value="otra">Otra</option>
+                    </select>
+                    <label for="nombre" class="form-label">Nombre</label>
+                    <select class="form-select" id="nombre" name="nombre">
+                        <option value="" selected>Seleccione un juego</option>
+                        <option value="lethal company">Lethal Company</option>
+                        <option value="Super Mario">Super Mario</option>
+                        <option value="Rainbow Six: Siege">Rainbow Six: Siege</option>
+                    </select>
+                    <label for="cantidad" class="form-label">Cantidad</label>
+                    <input type="text" class="form-control" id="cantidad" name="cantidad" placeholder="Cantidad de productos">
+                    <!--onkeypress="quitarPunto(this)"-->
+                    <div class="text-start mt-4">
+                        <button type="reset" class="btn btn-primary mx-2">Nuevo</button>
+                        <button type="submit" class="btn btn-secondary mx-2">Agregar</button>
+                    </div>
+                </div>
+            </div> 
+
+            <div class="col-lg-3">
+                <div class="card p-3">
+                    <!-- Imagen de perfil -->
+                    <div class="d-flex justify-content-center align-items-center mb-3" style="height: 100%;">
+                        <img id="perfilImg" src="img/placeholder.jpg" class="img-fluid" alt="Imagen de perfil">
+                    </div>
+                </div>
+            </div>  
+        </form>
+
+            
+
+            <div class="row">
+                <div class="col">
+                    <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Categoria</th>
+                                    <th>Nombre</th>
+                                    <th>Estado</th>
+                                    <th>Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>01</td>
+                                    <td>Aventura</td>
+                                    <td>Lethal Company</td>
+                                    <td>Entregado</td>
+                                        <div>
+                                        <td scope="col">
+                                            <button type="button" class="btn btn-danger btn-sm eliminar-producto">Eliminar</button>
+                                        </td>
+                                        </div>
+                                </tr>
+                            </tbody>
+                        
+                        </table>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js" integrity="sha512-WMEKGZ7L5LWgaPeJtw9MBM4i5w5OSBlSjTjCtSnvFJGSVD26gE5+Td12qN5pvWXhuWaWcVwF++F7aqu9cvqP0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="js/script.js"></script>
+    <script src="js/validador.js"></script>
+</body>
+</html>

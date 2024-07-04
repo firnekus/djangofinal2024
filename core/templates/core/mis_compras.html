@@ -1,0 +1,66 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load custom_filters %}
+
+{% block content %}
+
+
+<body>
+    <h1>ABASTGAMES</h1>
+    <div class="container-fluid">
+        <!-- Título y estados de la boleta -->
+        <div class="row">
+
+            <!-- Número de la boleta -->
+            <div class="col">
+                <h2>
+                    Mis compras anteriores en ABASTGAMES
+                </h2>
+            </div>
+            <div class="row">
+
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Nro boleta</th>
+                            <th>Fecha venta</th>
+                            <th>Fecha despacho</th>
+                            <th>Fecha entrega</th>
+                            <th>Monto total</th>
+                            <th>Estado actual</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for boleta in historial %}
+                        {% if boleta.estado == 'Anulado' %}
+                        <tr class="letra-boleta-anulada">
+                            {% else %}
+                        <tr>
+                            {% endif %}
+                            <td> {{ boleta.nro_boleta }} </td>
+                            <td> {{ boleta.fecha_venta|formatear_fecha }} </td>
+                            <td> {{ boleta.fecha_despacho|formatear_fecha }} </td>
+                            <td> {{ boleta.fecha_entrega|formatear_fecha }} </td>
+                            <td> {{ boleta.total_a_pagar }} </td>
+                            <td> {{ boleta.estado }} </td>
+                            <td>
+                                <a href="{% url 'boleta' boleta.nro_boleta %}"
+                                    class="btn btn-sm btn-primary">Detalle</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                    <tfoot>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>
+
+{% endblock content %}

@@ -1,0 +1,93 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load custom_filters %}
+
+{% block content %}
+
+<body>
+
+    <form id="form" method="POST" enctype="multipart/form-data">
+
+        {% csrf_token %}
+
+        <div class="container my-4">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card p-3">
+                        <form method="POST" id="form" enctype="multipart/form-data">
+                            <div class="mb-3">
+                                <label for="rut" class="form-label">RUT</label>
+                                {{formPerfil.rut}}
+                            </div>
+                            <div class="mb-3">
+                                <label for="rut" class="form-label">Usuario</label>
+                                {{formUser.username}}
+
+                            </div>
+                            <div class="mb-3">
+                                <label for="nombres" class="form-label">Nombres</label>
+                                {{formUser.first_name}}
+                            </div>
+                            <div class="mb-3">
+                                <label for="apellidos" class="form-label">Apellidos</label>
+                                {{formUser.last_name}}
+                            </div>
+                            <div class="mb-3">
+                                <label for="correo" class="form-label">E-mail</label>
+                                {{formUser.email}}
+
+                            </div>
+                            <div class="mb-3">
+                                <label for="direccion" class="form-label">Dirección</label>
+                                {{formPerfil.direccion}}
+                            </div>
+                            <div class="form-check mb-3">
+                                {{formPerfil.subscrito}}
+                                <label class="form-check-label" style="padding-right:20px" for="suscripcion">Deseo suscribirme con un aporte de $3000
+                                    mensuales y obtener un 5% de descuento en mis compras.</label>
+                            </div>
+                            <div class="mb-3">
+                                <label for="password1" class="form-label">Contraseña</label>
+                                {{formUser.password1}}
+                            </div>
+                            <div class="mb-3">
+                                <label for="password2" class="form-label">Repetir Contraseña</label>
+                                {{formUser.password2}}
+                            </div>
+
+                            {{ formPerfil.imagen }}
+                            <div class="text-start mt-4">
+                                <!-- Botón de guardar -->
+                                <button type="button" class="btn btn-primary mx-2"
+                                    onclick="mostrarMensaje()">Guardar</button>
+                                <button type="reset" class="btn btn-secondary mx-2">Limpiar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card p-3">
+                        <!-- Imagen de perfil -->
+                        <div class="d-flex justify-content-center align-items-center mb-3" style="height: 100%;">
+                            <img id="cuadro-imagen" src="/static/core/img/placeholder.jpg">
+                        </div>
+                        <!-- Botones para subir y eliminar imagen -->
+                        <div class="text-center mt-3">
+                            <button type="submit" class="btn btn-primary"> Guardar </button>
+                            <button onclick="event.preventDefault(); document.getElementById('id_imagen').click();" class="btn btn-primary">Subir Imagen</button> 
+                            <button id="crear_usuario_prueba" class="btn btn-danger">TEST</button>
+                            <button id="limpiar_formulario" class="btn btn-danger">Limpiar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+
+{% endblock content %}
+
+{% block script %}
+    <script src="{% static 'core/js/script.js' %}"></script>
+    <script src="{% static 'core/js/registrarme.js' %}"></script>
+{% endblock script %}

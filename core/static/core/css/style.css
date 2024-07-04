@@ -1,0 +1,181 @@
+.btn-separator {
+  margin-top: 20px;
+}
+
+.brr-separador {
+  margin-left: 30px;
+}
+.btn-separador-brr {
+  margin-left: 10px;
+}
+
+.index_disponible {
+  color: green;
+  font-weight: bolder;
+}
+
+.index_precio {
+  color: blue;
+}
+
+.index_subscrito {
+  color: red;
+}
+
+.index_descripcion {
+  font-weight: bolder;
+}
+
+.index_stock {
+  color: darkorchid;
+  font-weight: bolder;
+}
+
+h1 {
+  padding-top: 2%;
+  padding-left: 2.5%;
+}
+
+#objectCard {
+  padding-left: 5%;
+}
+
+/* Estilos generales para el modo oscuro */
+.dark-mode {
+  background-color: #333;
+  color: #fff;
+}
+
+/* Estilos específicos para el modo oscuro del menú */
+.dark-mode #menu {
+  background-color: #222; /* Cambia el fondo del menú */
+}
+
+/* Estilos específicos para el modo oscuro de las tarjetas */
+.dark-mode .card {
+  background-color: #222; /* Cambia el fondo de las tarjetas */
+  border: 1px solid #444; /* Cambia el borde de las tarjetas */
+  color: #fff; /* Cambia el color del texto en las tarjetas */
+}
+
+.container {
+  text-align: left;
+}
+
+/* Estilos para el mensaje emergente */
+.mensaje-emergente {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 20px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  opacity: 0.9;
+}
+.mensaje-emergente:hover {
+  opacity: 1;
+}
+
+.cerrar {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  cursor: pointer;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.error {
+  color: rgb(250, 50, 50);
+  font-weight: bold;
+}
+
+/* Estilos para la tabla */
+#tabla-ropa {
+  width: 80%; /* Ancho de la tabla */
+  margin: 20px auto; /* Margen superior e inferior de 20px y margen izquierdo y derecho automáticos */
+}
+
+/* Estilos para las celdas de la tabla */
+#tabla-ropa th,
+#tabla-ropa td {
+  text-align: left; /* Alinea el texto a la izquierda */
+  padding: 12px; /* Añade espaciado interno a las celdas */
+  white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+}
+
+/* Estilos adicionales para la tabla */
+#tabla-ropa th {
+  background-color: #f2f2f2; /* Color de fondo para las celdas de encabezado */
+}
+body {
+  margin: 0; /* Elimina el margen predeterminado del cuerpo */
+}
+
+.bi {
+  font-size:1rem;
+  display:inline-block;
+  vertical-align: middle;
+  margin-left: auto;
+
+  color:black;
+}
+
+label {
+  font-weight: bolder;
+}
+
+.fotoBoleta {
+  height: 70px;
+  width: 70px;
+}
+.card-body-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Cambiado para subir la imagen */
+  height: 100%;
+  padding-top: 20px; /* Espaciado adicional */
+}
+
+.form-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+th {
+  vertical-align: top;
+  background-color: lightgray !important;
+}
+
+input, textarea, select {
+  border-color: darkgray !important; /* Cambia "red" al color deseado */
+}
+
+/* Descomenta el selector div a continuación si quieres ver la diagramación de tu página */
+/* div {
+  border: 1px solid blue;
+} */
+
+.mensaje-emergente {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 20px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  opacity: 0.9;
+}
+.mensaje-emergente:hover {
+  opacity: 1;
+}

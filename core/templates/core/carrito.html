@@ -1,0 +1,88 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load custom_filters %}
+
+{% block content %}
+
+
+<body>
+  <div id="menu"></div>
+
+  <div class="container">
+    <section class="text-center">
+      <h1>Carrito de compras</h1>
+      <br>
+      <table class="table table-hover">
+        <thead>
+          <th scope="col" class="d-none d-lg-block d-lg-table-cell">Categoría</th>
+          <th scope="col">Nombre del producto</th>
+          <th scope="col" class="text-end">Precio</th>
+          <th scope="col" class="text-end d-none d-lg-block d-lg-table-cell">%Suscriptor</th>
+          <th scope="col" class="text-end d-none d-lg-block d-lg-table-cell">%Oferta</th>
+          <th scope="col" class="text-end d-none d-lg-block d-lg-table-cell">%Descuento total</th>
+          <th scope="col" class="text-end d-none d-lg-block d-lg-table-cell">Descuentos</th>
+          <th scope="col" class="text-end">Precio a pagar</th>
+          <th scope="col" class="text-end">Opciones</th>
+        </thead>
+        <tbody>
+          {% for item in detalle_carrito %}
+          <tr>
+            <td> {{ item.producto.categoria.nombre }} </td>
+            <td> {{ item.producto.nombre }} </td>
+            <td> {{ item.precio|formatear_dinero }} </td>
+            <td> {{ item.descuento_subscriptor|formatear_porcentaje }} </td>
+            <td> {{ item.descuento_oferta|formatear_porcentaje }} </td>
+            <td> {{ item.descuento_total|formatear_porcentaje }} </td>
+            <td> {{ item.descuentos|formatear_dinero }} </td>
+            <td class="text-end"> {{ item.precio_a_pagar|formatear_dinero }} </td>
+            <td> {{ item.id }} </td>
+            <td>
+              <div class="btn-group">
+                <a href="{% url 'ficha' item.producto.id %}" class="btn btn-sm btn-primary"> Detalle </a>
+                <a href="{% url 'eliminar_producto_en_carrito' item.id %}" class="btn btn-sm btn-danger"> Eliminar </a>
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+  </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12 d-flex justify-content-center">
+      <table class="table w-auto">
+        <tbody>
+          <tr>
+            <td><label class="text-start">Precio sin IVA:</label></td>
+            <td class="text-end">
+              <div class="rounded border p-2">{{ monto_sin_iva|formatear_dinero }}</div>
+            </td>
+          </tr>
+          <tr>
+            <td><label class="text-start">Valor del IVA (19%):</label></td>
+            <td class="text-end">
+              <div class="rounded border p-2">{{ iva|formatear_dinero }}</div>
+            </td>
+          </tr>
+          <tr>
+            <td><label class="text-start">Total a pagar:</label></td>
+            <td class="text-end">
+              <div class="rounded border p-2">{{ total_a_pagar|formatear_dinero }}</div>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2" class="text-end">
+              <button type="button" class="btn btn-primary btn-sm me-2">Cancelar compra</button>
+              <button type="button" class="btn btn-primary btn-sm">Comprar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  </section>
+  </div>
+
+</body>
+
+{% endblock content %}

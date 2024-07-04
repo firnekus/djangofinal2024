@@ -1,0 +1,84 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load custom_filters %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <h1>
+                Historial de Ventas
+            </h1>
+        </div>
+        <div class="row">
+            <div class="col">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Nro Boleta</th>
+                            <th>Fecha</th>
+                            <th>Nombre Cliente</th>
+                            <th>Subscrito</th>
+                            <th>Monto Total</th>
+                            <th>Estado Actual</th>
+                            <th>Detalle</th>
+                            <th>Cambiar Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for boleta in historial %}
+                        {% if boleta.estado == 'Anulado' %}
+                        <tr class="letra-boleta-anulada">
+                            {% else %}
+                        <tr>
+                            {% endif %}
+                            <td>
+                                {{boleta.nro_boleta}} <br>
+                            </td>
+                            <td>
+                                {% if boleta.estado == "Vendido" %}
+                                {{boleta.fecha_venta|formatear_fecha}} <br>
+                                {% elif boleta.estado == "Despachado" %}
+                                {{boleta.fecha_despacho|formatear_fecha}} <br>
+                                {% elif boleta.estado == "Entregado" %}
+                                {{boleta.fecha_entrega|formatear_fecha}} <br>
+                                {% else %}
+                                Anulado
+                                {% endif %}
+                            </td>
+                            <td>
+                                {{boleta.nom_cliente}} <br>
+                            </td>
+                            <td>
+                                {{boleta.subscrito}} <br>
+                            </td>
+                            <td>
+                                {{boleta.total_a_pagar|formatear_dinero}} <br>
+                            </td>
+                            <td>
+                                {{boleta.estado}} <br>
+                            </td>
+                            <td>
+                                <a href="{% url 'boleta' boleta.nro_boleta %}">Detalle</a><br><br>                            
+                            </td>
+                            <td>
+                                <div class="mb-3">
+                                    <a href="{% url 'cambiar_estado_boleta' boleta.nro_boleta 'Anulado' %}" class="btn btn-primary">Anulado</a> 
+                                    <a href="{% url 'cambiar_estado_boleta' boleta.nro_boleta 'Vendido' %}" class="btn btn-primary">Vendido</a>
+                                    <a href="{% url 'cambiar_estado_boleta' boleta.nro_boleta 'Despachado' %}" class="btn btn-primary">Despachado</a>
+                                    <a href="{% url 'cambiar_estado_boleta' boleta.nro_boleta 'Entregado' %}" class="btn btn-primary">Entregado</a>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+
+
+        {% endblock content %}
