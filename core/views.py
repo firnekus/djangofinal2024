@@ -141,7 +141,7 @@ def registro(request):
 
             message = 'Cuenta creada con exito'
             messages.success(request, message)
-
+            print(request.FILES)
             return redirect(ingresar)
         else:
             messages.error(request, "No fue posible crear tu cuenta.")
@@ -257,20 +257,22 @@ def ventas(request):
 def productos(request, accion, id):
     
     if request.method == 'POST':
-        
+        print(accion)
         if accion == 'crear':
             form = ProductoForm(request.POST, request.FILES)
-        elif accion == 'crear':
+        elif accion == 'actualizar':
             form = ProductoForm(request.POST, request.FILES, instance=Producto.objects.get(id=id))
 
-
+        print(form.fields)
         if form.is_valid():
+            print("Muejeje")
             producto = form.save()
             ProductoForm(instance=producto)
             messages.success(request, f'El producto ha sido creado.')
+            print(form.cleaned_data)
             return redirect(productos, 'actualizar', producto.id)
         else:
-            messages.error("No se ha podido crear el producto")
+            show_form_errors(request, [form])
     if request.method == 'GET':
 
         if accion == 'crear':
@@ -282,14 +284,15 @@ def productos(request, accion, id):
             messages.success(request, mensaje)
             if eliminado:
                 return redirect(productos, 'crear', 0)
-
             form = ProductoForm(instance=Producto.objects.get(id=id))
     # CREAR: variable de contexto para enviar el formulario y todos los productos
+
     context = { 
         'form':form,
-        'productos': Producto.objects.all
+        'productos': Producto.objects.all()
     }
-
+    print(form.fields)
+    print(form)
     return render(request, 'core/productos.html', context)
 
 @user_passes_test(es_personal_autenticado_y_activo)
@@ -297,25 +300,47 @@ def usuarios(request, accion, id):
     
     # CREAR: variables de usuario y perfil
 
+    usuario = User.objects.get(id=id) if int(id) > 0 else None
+    perfil = usuario.perfil if usuario else None
+
+
+
+
     if request.method == 'POST':
 
-        # CREAR: un formulario UsuarioForm para recuperar datos del formulario asociados al usuario
-        # CREAR: un formulario PerfilForm para recuperar datos del formulario asociados al perfil del usuario
-        # CREAR: lógica para actualizar los datos del usuario
-        pass
-    
+        formUser = UsuarioForm(request.POST, instance=usuario)
+        formPerfil = PerfilForm(request.POST, request.FILES, instance=perfil)
+
+        if formUser.is_valid() and formPerfil.is_valid():
+            usuario = formUser.save(commit=False)
+            tipoUser = formPerfil.cleaned_data['tipo_usuario']
+            usuario.is_staff = tipoUser in ['Administrador', 'Superusuario']
+            perfil = formPerfil.save(commit=False)
+            usuario.save()
+            perfil.usuario_id = usuario.id
+            perfil.save()
+            messages.success(request, f'El usuario {usuario.first_name} {usuario.last_name} ha sido creado.')
+        else:
+            show_form_errors(request, [formUser])
+            show_form_errors(request, [formPerfil])
+
+
     if request.method == 'GET':
 
         if accion == 'eliminar':
-            # CREAR: acción de eliminar un usuario
-            pass
+            eliminado, mensaje = eliminar_registro(User, id)
+            messages.success(request, mensaje)
+            return redirect(usuarios, 'crear', 0)
         else:
-            # CREAR: un formulario UsuarioForm asociado al usuario
-            # CREAR: un formulario PerfilForm asociado al perfil del usuario
-            pass
-
+            formUser = UsuarioForm(instance=usuario)
+            formPerfil = PerfilForm(instance=perfil)
     # CREAR: variable de contexto para enviar el formulario de usuario, formulario de perfil y todos los usuarios
-    context = { }
+
+    context = { 
+        'formUser': formUser,
+        'formPerfil': formPerfil,
+        'usuarios': Perfil.objects.all()
+    }
 
     return render(request, 'core/usuarios.html', context)
 
@@ -323,9 +348,18 @@ def usuarios(request, accion, id):
 def bodega(request):
 
     if request.method == 'POST':
+        producto_id = request.POST.get('producto')
+        print(producto_id)
+        producto = Producto.objects.get(id=producto_id)
+        cantidad = int(request.POST.get('cantidad'))
+        print(producto)
+        for cantidad in range(1, cantidad + 1):
+            Bodega.objects.create(producto=producto)
+        if cantidad == 1:
+            messages.success(request, f"Se ha agregado un nuevo {producto.nombre}.")
+        else:
+            messages.success(request, f"Se han agregado {cantidad} nuevos {producto.nombre}.")
 
-        # CREAR: acciones para agregar productos a la bodega
-        pass
 
     registros = Bodega.objects.all()
     lista = []
@@ -350,20 +384,28 @@ def bodega(request):
 
 @user_passes_test(es_personal_autenticado_y_activo)
 def obtener_productos(request):
-    # La vista obtener_productos la usa la pagina "Administracion de bodega", para
-    # filtrar el combobox de productos cuando el usuario selecciona una categoria
-    
-    # CREAR: Un JSON para devolver los productos que corresponden a la categoria
+    categoria_id = request.GET.get('categoria_id')
+    productos = Producto.objects.filter(categoria_id=categoria_id)
 
-    data = []
+
+    data = [
+        {
+            'id': producto.id,
+            'nombre': producto.nombre,
+            'imagen': producto.imagen.url
+        } for producto in productos
+    ]
     return JsonResponse(data, safe=False)
 
 @user_passes_test(es_personal_autenticado_y_activo)
 def eliminar_producto_en_bodega(request, bodega_id):
-    # La vista eliminar_producto_en_bodega la usa la pagina "Administracion de bodega", 
-    # para eliminar productos que el usuario decidio sacar del inventario
+    nombre_producto = Bodega.objects.get(id=bodega_id).producto.nombre
+    eliminado, error = verificar_eliminar_registro(Bodega, bodega_id, True)
 
-    # CREAR: lógica para eliminar un producto de la bodega
+    if eliminado:
+        messages.success(request, f"Se ha eliminado el {bodega_id} con exito.")
+    else:
+        messages.error(request, error)
 
     return redirect(bodega)
 
@@ -626,7 +668,7 @@ def enviar_correo_cambio_password(request, user, password):
             'user_password': password,
             'link_to_login': url_ingresar,
         })
-        from_email = 'info@faithfulpet.com'  # La dirección de correo que aparecerá como remitente
+        from_email = 'elbenjacarrasco35@gmail.com'  # La dirección de correo que aparecerá como remitente
         recipient_list = []
         recipient_list.append(user.email)
         # Enviar el correo

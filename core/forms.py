@@ -27,15 +27,21 @@ class ProductoForm(ModelForm):
     class Meta:
         model = Producto
         fields = '__all__'
+        labels = {
+            'nombre': 'Nombre',
+            'subscriptor': 'Subscriptor(%)',
+            'oferta': 'Oferta(%)'
+        }
         widgets = {
-            'descripcion': forms.Textarea(attrs={'class': 'form-control'})
+            'descripcion': forms.Textarea(attrs={'rows': 4, 'cols': 40}),
+            'imagen': forms.FileInput(attrs={'style': 'display:none;'})
         }
 
 # El formulario de bodega está listo, no necesitas modificarlo
 class BodegaForm(Form):
-    categoria = forms.ModelChoiceField(queryset=Categoria.objects.all(), label='Categoría')
-    producto = forms.ModelChoiceField(queryset=Producto.objects.none(), label='Producto')
-    cantidad = forms.IntegerField(label='Cantidad')
+    categoria = forms.ModelChoiceField(queryset=Categoria.objects.all(), label ="", widget=forms.Select(attrs={'class': 'form-control'}))
+    producto = forms.ModelChoiceField(queryset=Producto.objects.none(), label='', widget=forms.Select(attrs={'class': 'form-control'}))
+    cantidad = forms.IntegerField(label='', widget=forms.NumberInput(attrs={'class':"form-control"}))
     class Meta:
         fields = '__all__'
 
@@ -63,7 +69,7 @@ class RegistroUsuarioForm(UserCreationForm):
             'last_name': forms.TextInput(attrs={'class': 'form-control'}),
             'email': forms.TextInput(attrs={'class': 'form-control'}),
             'password1': forms.PasswordInput(attrs={'class': 'form-control'}),
-            'password2': forms.PasswordInput(attrs={'class': 'form-control'})
+            'password2': forms.PasswordInput(attrs={'class': 'form-control'}),
         }
         labels = {
             'email': 'E-mail'
@@ -118,4 +124,10 @@ class UsuarioForm(ModelForm):
 class PerfilForm(ModelForm):
     class Meta:
         model = Perfil
-        fields = '__all__'
+        fields = ['tipo_usuario', 'rut', 'direccion', 'subscrito', 'imagen']
+        widgets = {
+            'direccion': forms.TextInput(attrs={'class': 'form-control'}),
+            'imagen': forms.FileInput(),
+            'rut': forms.TextInput(attrs={'class': 'form-control'}),
+            'tipo_usuario': forms.Select(attrs={'class': 'form-control'})
+        }
