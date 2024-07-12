@@ -1,23 +1,6 @@
 $(document).ready(function() {
 
-  // Asignar placeholders para ayudar a los usuarios
-  $('#id_username').attr('placeholder', 'Ej: cgomezv, cevans, sjohasson');
-  $('#id_first_name').attr('placeholder', 'Ej: Cristián, Chris, Scarlett');
-  $('#id_last_name').attr('placeholder', 'Ej: Gómez Vega, Evans, Johansson');
-  $('#id_email').attr('placeholder', 'Ej: cevans@marvels.com');
-  $('#id_rut').attr('placeholder', 'Ej: 11111111-1 (sin puntos y con guión)');
-  $('#id_direccion').attr('placeholder', 'Calle, n° casa o edificio, n° departamento o piso\n'
-    + 'localidad o ciudad, código postal o de área\n'
-    + 'estado o provincia, ciudad, país');
 
-  // Cambiar el texto del combo de Tipo de usuario por "Seleccione un tipo de usuario"
-  var select = document.querySelector('select[name="tipo_usuario"]');
-  if (select) {
-      var defaultOption = select.querySelector('option[value=""]');
-      if (defaultOption) {
-          defaultOption.text = "Seleccione un tipo de usuario";
-      }
-  }
 
   // Agregar una validación por defecto para que la imagen la exija como campo obligatorio
   $.extend($.validator.messages, {
@@ -31,7 +14,7 @@ $(document).ready(function() {
         },
         'tipo_usuario': {
           required: true,
-          inList: ['Cliente', 'Administrador'],
+          inList: ['Cliente', 'Administrador', 'Superusuario'],
         },
         'first_name': {
           required: true,

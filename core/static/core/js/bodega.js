@@ -1,25 +1,12 @@
 $(document).ready(function() {
 
   // Asignar placeholders para ayudar a los usuarios
-  $('#id_cantidad').attr('placeholder', 'Ej: 10, agregará 10 productos en la bodega');
 
   // Cambiar el texto del combo de categoría por "Seleccione una categoría"
-  var select = document.querySelector('select[name="categoria"]');
-    if (select) {
-      var defaultOption = select.querySelector('option[value=""]');
-      if (defaultOption) {
-          defaultOption.text = "Seleccione una categoría";
-      }
-  }
+
 
   // Cambiar el texto del combo de producto por "Seleccione un producto"
-  var select = document.querySelector('select[name="producto"]');
-  if (select) {
-      var defaultOption = select.querySelector('option[value=""]');
-      if (defaultOption) {
-          defaultOption.text = "Seleccione un producto";
-      }
-  }
+
 
   $('#form').validate({ 
     rules: {
@@ -76,9 +63,9 @@ $(document).ready(function() {
           $("#id_producto").empty();
           $('#cuadro-imagen').attr('src', sin_imagen);
           if (data.length === 0) {
-            $("#id_producto").append(`<option value="-1" data-imagen="${sin_imagen}">No hay productos disponibles</option>`);
+            $("#id_producto").append(`<option value="-1" data-imagen="${sin_imagen}">No hay productos</option>`);
           } else {
-            $("#id_producto").append(`<option value="-1" selected="" data-imagen="${sin_imagen}">Seleccione un producto</option>`);
+            $("#id_producto").append(`<option value="-1" selected="" data-imagen="${sin_imagen}"></option>`);
             $.each(data, function(key, value) {
               $("#id_producto").append(`<option value="${value.id}" data-imagen="${value.imagen}"> ${value.nombre} </option>`);
             });
