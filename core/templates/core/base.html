@@ -14,7 +14,6 @@
 
     <link type="image/x-icon" rel="shortcut icon" href="{% static 'core/img/favicon.png' %}" />
     <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous" />
-    <link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" />
     <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link type="text/css" rel="stylesheet" href="{% static 'core/css/style.css' %}">
    
@@ -22,7 +21,7 @@
 
     <!-- BLOQUE DE ESTILOS CSS PERSONALIZADOS PARA CADA PAGINA -->
     {% block stylesheet %}
-      
+    <link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" />
     {% endblock stylesheet %}
 
     <!-- BLOQUE DE JAVASCRIPT EN HEAD, PERSONALIZADOS PARA CADA PAGINA -->
@@ -55,9 +54,6 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{% url 'nosotros' %}"> Nosotros </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{% url 'carrito' %}"> Carrito </a>
-          </li>
           
           {% if user.is_authenticated %}
           <li class="nav-item active">
@@ -72,13 +68,16 @@
             <li class="nav-item active">
               <a class="nav-link active" aria-current="page" href="{% url 'miscompras' %}"> Mis Compras </a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="{% url 'carrito' %}"> Carrito </a>
+            </li>
           {% endif %} 
 
           {% if user.is_authenticated and user.is_staff and user.is_active or user.is_authenticated and user.is_superuser and user.is_active %}
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" 
                 aria-expanded="false">
-              Admnistrar
+              Administrar
             </a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="{% url 'productos' 'crear' '0' %}"> Productos </a></li>
@@ -142,6 +141,7 @@
     <script type="text/javascript" src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript" src="{% static 'core/js/script.js' %}"></script>
+    
 
     <div class="instrucciones-para-el-alumno">
     </div>

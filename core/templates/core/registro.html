@@ -58,8 +58,7 @@
                             {{ formPerfil.imagen }}
                             <div class="text-start mt-4">
                                 <!-- Botón de guardar -->
-                                <button type="button" class="btn btn-primary mx-2"
-                                    onclick="mostrarMensaje()">Guardar</button>
+                                <button type="submit" class="btn btn-primary"> Guardar </button>
                                 <button type="reset" class="btn btn-secondary mx-2">Limpiar</button>
                             </div>
                         </form>
@@ -73,7 +72,6 @@
                         </div>
                         <!-- Botones para subir y eliminar imagen -->
                         <div class="text-center mt-3">
-                            <button type="submit" class="btn btn-primary"> Guardar </button>
                             <button onclick="event.preventDefault(); document.getElementById('id_imagen').click();" class="btn btn-primary">Subir Imagen</button> 
                             <button id="crear_usuario_prueba" class="btn btn-danger">TEST</button>
                             <button id="limpiar_formulario" class="btn btn-danger">Limpiar</button>

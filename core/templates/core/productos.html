@@ -4,15 +4,19 @@
 
 {% block content %}
 
-{% csrf_token %}
 
 <body>
     <div id="menu"></div>
 
     <div class="container mt-5">
+        
 
         <h1>Mantenedor de Productos</h1>
-        <form name="validacionProducto" id="form" novalidate method="post">
+        <form name="validacionProducto" enctype="multipart/form-data" id="form" novalidate method="post">
+
+            {% csrf_token %}
+            
+
             <div class="container mt-5">
                 <div class="row">
                     <div class="col-md-6">
@@ -44,30 +48,33 @@
                     <div class="col-md-6">
                         <div class="card p-3">
                             {% if form.imagen.value %}
-                                <img id="cuadro-imagen" src="/media/{{ form.imagen.value }}" class="img-fluid">
-                            {% else %}
+                            <div class="d-flex justify-content-center align-items-center mb-3" style="height: 25%">
+                                <img id="cuadro-imagen" src="/media/{{ form.imagen.value }}" style="max-width: 250px; max-height:250px">
+                            </div>                            {% else %}
                                 <img id="cuadro-imagen" src="{% static 'core/img/sin-imagen.png' %}" class="img-fluid">
                             {% endif %}
-                            {{ form.imagen|as_bootstrap_field }}
+                            
                             <div class="text-center mt-3">
-                                <input type="file" id="imgUpload" accept="image/*" style="display:none;" />
-                                <label for="imgUpload" class="btn btn-primary img-upload-label">Subir Imagen</label>
+                                <div class="text-center mt-3">
+                                    <button onclick="event.preventDefault(); document.getElementById('id_imagen').click();" class="btn btn-primary">Subir Imagen</button> 
+                                </div>
+                                {{form.imagen}}
                                 <button id="eliminarImagen" class="btn btn-danger">Eliminar</button>
                             </div>
                         </div>
                     </div>
-                    
                 </div>
             </div>
 
+            <div class="row-sm-12 mx-4 my-2">
+                <button type="reset" id="limpiar_formulario" class="btn btn-primary mx-2">Nuevo</button>
+                <input class="btn btn-primary" type="submit" value="Agregar">
+                {% if form.instance.id %}
+                    <a class="btn btn-primary" href="{% url 'productos' 'eliminar' form.instance.id %}"> Eliminar </a>
+                {% endif %}
+            </div>
         </form>
-        <div class="row-sm-12 mx-4 my-2">
-            <button type="reset" class="btn btn-primary mx-2">Nuevo</button>
-            <input class="btn btn-primary" type="submit" value="Agregar">
-            {% if form.instance.id %}
-            <a class="btn btn-primary"  href="{% url 'productos' 'eliminar' form.instance.id %}"> Eliminar </a>
-            {% endif %}
-        </div>
+       
     </div>
 
     <div class="container mt-5">
@@ -89,7 +96,7 @@
             <tbody>
                 {% for producto in productos %}
                 <tr>
-                    <td>{{producto.id}}</td>
+                <td>{{producto.id}}</td>
                 <td>{{producto.nombre}}</td>
                 <td>{{producto.categoria}}</td>
                 <td>{{producto.precio|formatear_dinero}}</td>
@@ -115,9 +122,9 @@
 
 
 
-</html>
 
 {% endblock content %}
 {% block script %}
 <script src="{% static 'core/js/productos.js' %}"></script>
+<script src="{% static 'core/js/script.js' %}"></script>
 {% endblock script %}
